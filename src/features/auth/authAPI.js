@@ -1,7 +1,7 @@
 // user created
 export function createUser(userData) {
   return new Promise(async (resolve) => {
-    const response = await fetch(" http://localhost:800/users", {
+    const response = await fetch(" http://localhost:800/auth/signup", {
       method: "POST",
       body: JSON.stringify(userData),
       headers: {
@@ -15,30 +15,31 @@ export function createUser(userData) {
 // user signup
 export function checkUser(logininfo) {
   return new Promise(async (resolve, reject) => {
-    const email = logininfo.email;
-    const password = logininfo.password;
-    const response = await fetch(" http://localhost:800/users?email=" + email);
-    const data = await response.json();
-    if (data.length) {
-      if (password === data[0].password) {
-        resolve({ data: data[0] });
+    try {
+      const response = await fetch("http://localhost:800/auth/login", {
+        method: "POST",
+        body: JSON.stringify(logininfo),
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        resolve({ data });
       } else {
-        reject({ message: "Wrong Credentials:" });
+        const error = await response.text();
+        reject(error); // Assuming the server returns error data in JSON format
       }
-    } else {
-      reject({ message: "User Not Found:" });
+    } catch (error) {
+      reject(error);
     }
   });
 }
 
-
-
 //Logout
 export function signOut(userID) {
   return new Promise(async (resolve) => {
-   
-  //  Todo://
-    resolve({ data:'sussess' });
+    //  Todo://
+    resolve({ data: "sussess" });
   });
 }
-

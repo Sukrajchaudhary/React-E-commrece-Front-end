@@ -12,6 +12,7 @@ export default function UserProfile() {
     newUser.addresses.splice(index, 1);
     dispatch(updateUserAsync(newUser));
   };
+
   const handleEdiit = (addressUpdate, index) => {
     const newUser = { ...user, addresses: [...user.addresses] }; //for shallow copy
     newUser.addresses.splice(index, 1, addressUpdate);
@@ -19,7 +20,7 @@ export default function UserProfile() {
     setSelectedEditIndex(-1);
     setValue();
   };
- const [showAddressForm,setshowAddressForm]=useState(false);
+  const [showAddressForm, setshowAddressForm] = useState(false);
   const {
     handleSubmit,
     register,
@@ -38,200 +39,201 @@ export default function UserProfile() {
     setValue("street", address.street);
     setValue("phone", address.phone);
   };
-  const handleAdd=(address)=>{
-    const newUser = { ...user, addresses: [...user.addresses,address] }; //for shallow copy    dispatch(updateUserAsync(newUser));
-    setSelectedEditIndex(newUser);
+  const handleAdd = (data) => {
+    const newUser = { ...user, addresses: [...user.addresses, data] };
     dispatch(updateUserAsync(newUser));
-    setshowAddressForm(false)
-  }
+    setSelectedEditIndex(-1);
+  };
+
   // todo  for check out
   return (
     <div>
-      <div className="mx-auto mt-10 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
-        <p className="text-2xl font-bold tracking-tighter text-black-900">
-          Name:{user.name ? user.name:null}
-        </p>
+      <div className="mx-auto mt-10 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">   
         <p className="text-2xl font-bold tracking-tighter text-red-900">
           Email:{user.email}
         </p>
-       {user.role==='admin'? <p className="text-2xl my-2 font-bold tracking-tighter text-red-900">
-          role:{user.role}
-        </p>:null}
+        
+        {user.role === "admin" ? (
+          <p className="text-2xl my-2 font-bold tracking-tighter text-red-900">
+            role:{user.role && user.role}
+          </p>
+        ) : null} 
 
         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-          <button 
-          onClick={(e)=>{setshowAddressForm(true);setSelectedEditIndex(-1)}}
+          <button
+            onClick={(e) => {
+              setshowAddressForm(true);
+              setSelectedEditIndex(-1);
+            }}
             type="submit"
             className="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Add Address
           </button>
-          {showAddressForm? (
-                    <form
-                      className="bg-white px-4 mt-10"
-                      noValidate
-                      onSubmit={handleSubmit((data) => {
-                        handleAdd(data);
-                        reset();
-                      })}
-                    >
-                      <div className="space-y-12">
-                        <div className="border-b border-gray-900/10 pb-12">
-                          <h2 className="text-base font-semibold leading-7 text-gray-900">
-                            Personal Information
-                          </h2>
-                          <p className="mt-1 text-sm leading-6 text-gray-600">
-                            Use a permanent address where you can receive mail.
-                          </p>
+          {showAddressForm ? (
+            <form
+              className="bg-white px-4 mt-10"
+              noValidate
+              onSubmit={handleSubmit((data) => {
+                handleAdd(data);
+                reset();
+              })}
+            >
+              <div className="space-y-12">
+                <div className="border-b border-gray-900/10 pb-12">
+                  <h2 className="text-base font-semibold leading-7 text-gray-900">
+                    Personal Information
+                  </h2>
+                  <p className="mt-1 text-sm leading-6 text-gray-600">
+                    Use a permanent address where you can receive mail.
+                  </p>
 
-                          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <div className="sm:col-span-4">
-                              <label
-                                htmlFor="name"
-                                className="block text-sm font-medium leading-6 text-gray-900"
-                              >
-                                Full name
-                              </label>
-                              <div className="mt-2">
-                                <input
-                                  type="text"
-                                  {...register("name", {
-                                    required: "Name is Required:",
-                                  })}
-                                  id="name"
-                                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                              </div>
-                            </div>
-                            <div className="sm:col-span-4">
-                              <label
-                                htmlFor="email"
-                                className="block text-sm font-medium leading-6 text-gray-900"
-                              >
-                                Email address
-                              </label>
-                              <div className="mt-2">
-                                <input
-                                  id="email"
-                                  {...register("email", {
-                                    required: "email is Required:",
-                                  })}
-                                  type="email"
-                                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                              </div>
-                            </div>
-
-                            <div className="sm:col-span-3">
-                              <label
-                                htmlFor="phole"
-                                className="block text-sm font-medium leading-6 text-gray-900"
-                              >
-                                Phone Number
-                              </label>
-                              <div className="mt-2">
-                                <input
-                                  id="email"
-                                  {...register("phone", {
-                                    required: "Phone Number is Required:",
-                                  })}
-                                  type="tel"
-                                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                              </div>
-                            </div>
-
-                            <div className="col-span-full">
-                              <label
-                                htmlFor="street"
-                                className="block text-sm font-medium leading-6 text-gray-900"
-                              >
-                                Street address
-                              </label>
-                              <div className="mt-2">
-                                <input
-                                  type="text"
-                                  {...register("street", {
-                                    required: "street is Required:",
-                                  })}
-                                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                              </div>
-                            </div>
-
-                            <div className="sm:col-span-2 sm:col-start-1">
-                              <label
-                                htmlFor="city"
-                                className="block text-sm font-medium leading-6 text-gray-900"
-                              >
-                                City
-                              </label>
-                              <div className="mt-2">
-                                <input
-                                  type="text"
-                                  {...register("city", {
-                                    required: "City is Required:",
-                                  })}
-                                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                              </div>
-                            </div>
-
-                            <div className="sm:col-span-2">
-                              <label
-                                htmlFor="state"
-                                className="block text-sm font-medium leading-6 text-gray-900"
-                              >
-                                State / Province
-                              </label>
-                              <div className="mt-2">
-                                <input
-                                  type="text"
-                                  {...register("state", {
-                                    required: "state is Required:",
-                                  })}
-                                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                              </div>
-                            </div>
-
-                            <div className="sm:col-span-2">
-                              <label
-                                htmlFor="pincode"
-                                className="block text-sm font-medium leading-6 text-gray-900"
-                              >
-                                ZIP / Postal code
-                              </label>
-                              <div className="mt-2">
-                                <input
-                                  type="text"
-                                  {...register("pincode", {
-                                    required: "Pincode is Required:",
-                                  })}
-                                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="mt-6 flex items-center justify-end gap-x-6">
-                      
-                          <button
-                            type="submit"
-                            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                          >
-                            Add Address
-                          </button>
-                        </div>
-                        <div className="border-b border-gray-900/10 pb-12">
-                          <h2 className="text-base font-semibold leading-7 text-gray-900">
-                            Address
-                          </h2>
-                        </div>
+                  <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <div className="sm:col-span-4">
+                      <label
+                        htmlFor="name"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Full name
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          {...register("name", {
+                            required: "Name is Required:",
+                          })}
+                          id="name"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
                       </div>
-                    </form>
-                  ) : null}
+                    </div>
+                    <div className="sm:col-span-4">
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Email address
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          id="email"
+                          {...register("email", {
+                            required: "email is Required:",
+                          })}
+                          type="email"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                    </div>
 
+                    <div className="sm:col-span-3">
+                      <label
+                        htmlFor="phole"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Phone Number
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          id="email"
+                          {...register("phone", {
+                            required: "Phone Number is Required:",
+                          })}
+                          type="tel"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="col-span-full">
+                      <label
+                        htmlFor="street"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Street address
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          {...register("street", {
+                            required: "street is Required:",
+                          })}
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="sm:col-span-2 sm:col-start-1">
+                      <label
+                        htmlFor="city"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        City
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          {...register("city", {
+                            required: "City is Required:",
+                          })}
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <label
+                        htmlFor="state"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        State / Province
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          {...register("state", {
+                            required: "state is Required:",
+                          })}
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <label
+                        htmlFor="pincode"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        ZIP / Postal code
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          {...register("pincode", {
+                            required: "Pincode is Required:",
+                          })}
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-6 flex items-center justify-end gap-x-6">
+                  <button
+                    type="submit"
+                    className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  >
+                    Add Address
+                  </button>
+                </div>
+                <div className="border-b border-gray-900/10 pb-12">
+                  <h2 className="text-base font-semibold leading-7 text-gray-900">
+                    Address
+                  </h2>
+                </div>
+              </div>
+            </form>
+          ) : null}
 
           <p className="mt-0-5 text-sm text-gray-500">Your Addrss:</p>
 

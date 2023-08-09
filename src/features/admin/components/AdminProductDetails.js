@@ -51,7 +51,7 @@ dispatch(fetchProductbyIdAsync(params.id))
 
 const  hadlecart=(e)=>{
   e.preventDefault();
-  const newItem={...product,quantity:1,user:user.id};
+  const newItem={...product,quantity:1};
   delete newItem['id'];
   dispatch(addTocartAsync(newItem)
   )

@@ -11,10 +11,10 @@ const OrdersuccessPage = () => {
   const user=useSelector(selectLoggedInUsr)
   useEffect(()=>{
     // reset cart
-    dispatch(resetCartAsync(user.id));
+    dispatch(resetCartAsync());
     // reset curent order
     dispatch(resetOrder())
-  },[dispatch,user])
+  },[dispatch])
   return (
     <>{!params&&<Navigate to='/' replace={true}></Navigate>}
     <div>

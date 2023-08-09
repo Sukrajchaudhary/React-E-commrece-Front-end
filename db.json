@@ -7,7 +7,7 @@
       "price": 100,
       "discountPercentage": 70,
       "rating": 0,
-      "stock": 94,
+      "stock": 0,
       "brand": "skincare",
       "category": "ROREC White Rice",
       "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
@@ -911,12 +911,53 @@
     {
       "email": "kaalidash208@gmail.com",
       "password": "Password@123",
-      "addresses": [],
+      "addresses": [
+        {
+          "name": "Sukraj",
+          "email": "sukrajchaudhary90@gmail.com",
+          "phone": "9809521702",
+          "street": "state II",
+          "city": "KTM",
+          "state": "state5",
+          "pincode": "12345"
+        },
+        {
+          "name": "sukraj",
+          "email": "sukrajchaudhary90@gmail.com",
+          "city": "KTM",
+          "state": "5",
+          "pincode": "12345",
+          "street": "state II",
+          "phone": "9809521702"
+        }
+      ],
       "role": "admin",
       "id": 11
     }
   ],
-  "carts": [],
+  "carts": [
+    {
+      "title": "OPPOF",
+      "description": "OPPO F19 is officially announced on April 2021.",
+      "price": 100,
+      "discountPercentage": 14,
+      "rating": 0,
+      "stock": 123,
+      "brand": "smartphones",
+      "category": "OPPO",
+      "thumbnail": "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/4/1.jpg",
+        "https://i.dummyjson.com/data/products/4/2.jpg",
+        "https://i.dummyjson.com/data/products/4/3.jpg",
+        "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
+      ],
+      "productId": 4,
+      "quantity": 2,
+      "user": 10,
+      "id": 1
+    }
+  ],
   "orders": [
     {
       "items": [
@@ -1081,7 +1122,8 @@
       },
       "paymentmethod": "cash",
       "selectedAddress": null,
-      "id": 1
+      "id": 1,
+      "status": "cancled"
     },
     {
       "items": [
@@ -1186,7 +1228,7 @@
       },
       "paymentmethod": "cash",
       "selectedAddress": null,
-      "status": "pending",
+      "status": "cancled",
       "id": 2
     },
     {
@@ -1318,7 +1360,7 @@
       },
       "paymentmethod": "card",
       "selectedAddress": null,
-      "status": "pending",
+      "status": "deliver",
       "id": 3
     },
     {
@@ -1450,7 +1492,7 @@
       },
       "paymentmethod": "cash",
       "selectedAddress": null,
-      "status": "pending",
+      "status": "dispatch",
       "id": 4
     },
     {
@@ -1603,7 +1645,7 @@
       },
       "paymentmethod": "cash",
       "selectedAddress": null,
-      "status": "pending",
+      "status": "dispatch",
       "id": 5
     },
     {
@@ -1765,7 +1807,7 @@
       },
       "paymentmethod": "cash",
       "selectedAddress": null,
-      "status": "pending",
+      "status": "dispatch",
       "id": 6
     },
     {
@@ -2525,7 +2567,7 @@
       },
       "paymentmethod": "cash",
       "selectedAddress": null,
-      "status": "pending",
+      "status": "cancled",
       "id": 11
     },
     {
@@ -2662,7 +2704,7 @@
       },
       "paymentmethod": "cash",
       "selectedAddress": null,
-      "status": "pending",
+      "status": "dispatch",
       "id": 12
     },
     {
@@ -2807,7 +2849,7 @@
         "state": "5",
         "pincode": "12345"
       },
-      "status": "pending",
+      "status": "dispatch",
       "id": 13
     },
     {
@@ -3011,7 +3053,7 @@
         "street": "state II",
         "phone": "9809521702"
       },
-      "status": "pending",
+      "status": "cancled",
       "id": 15
     },
     {
@@ -3064,6 +3106,262 @@
       },
       "status": "pending",
       "id": 16
+    },
+    {
+      "items": [
+        {
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/2/1.jpg",
+            "https://i.dummyjson.com/data/products/2/2.jpg",
+            "https://i.dummyjson.com/data/products/2/3.jpg",
+            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 11,
+          "id": 1
+        }
+      ],
+      "totalAmount": 899,
+      "totalItems": 1,
+      "user": {
+        "email": "kaalidash208@gmail.com",
+        "password": "Password@123",
+        "addresses": [
+          {
+            "name": "sukraj",
+            "email": "sukrajchaudhary90@gmail.com",
+            "phone": "9809521702",
+            "street": "state II",
+            "city": "KTM",
+            "state": "5",
+            "pincode": "12345"
+          },
+          {
+            "name": "Sukraj",
+            "email": "sukrajchaudhary90@gmail.com",
+            "phone": "9809521702",
+            "street": "state II",
+            "city": "KTM",
+            "state": "state5",
+            "pincode": "12345"
+          }
+        ],
+        "role": "admin",
+        "id": 11
+      },
+      "paymentmethod": "cash",
+      "selectedAddress": {
+        "name": "sukraj",
+        "email": "sukrajchaudhary90@gmail.com",
+        "phone": "9809521702",
+        "street": "state II",
+        "city": "KTM",
+        "state": "5",
+        "pincode": "12345"
+      },
+      "status": "deliver",
+      "id": 17
+    },
+    {
+      "items": [
+        {
+          "title": "OPPOF",
+          "description": "OPPO F19 is officially announced on April 2021.",
+          "price": 100,
+          "discountPercentage": 14,
+          "rating": 0,
+          "stock": 123,
+          "brand": "smartphones",
+          "category": "OPPO",
+          "thumbnail": "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/4/1.jpg",
+            "https://i.dummyjson.com/data/products/4/2.jpg",
+            "https://i.dummyjson.com/data/products/4/3.jpg",
+            "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 9,
+          "id": 1
+        }
+      ],
+      "totalAmount": 100,
+      "totalItems": 1,
+      "user": {
+        "email": "whoamiwhoami790@gmail.com",
+        "password": "Password@123",
+        "id": 9,
+        "addresses": [
+          {
+            "name": "Who ami Chaudhary",
+            "email": "Anusha12345@gmail.com",
+            "city": "KTM",
+            "state": "stateII",
+            "pincode": "12345",
+            "street": "state II",
+            "phone": "9809521702"
+          }
+        ]
+      },
+      "paymentmethod": "cash",
+      "selectedAddress": {
+        "name": "Who ami Chaudhary",
+        "email": "Anusha12345@gmail.com",
+        "city": "KTM",
+        "state": "stateII",
+        "pincode": "12345",
+        "street": "state II",
+        "phone": "9809521702"
+      },
+      "status": "deliver",
+      "id": 18
+    },
+    {
+      "items": [
+        {
+          "title": "OPPOF",
+          "description": "OPPO F19 is officially announced on April 2021.",
+          "price": 100,
+          "discountPercentage": 14,
+          "rating": 0,
+          "stock": 123,
+          "brand": "smartphones",
+          "category": "OPPO",
+          "thumbnail": "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/4/1.jpg",
+            "https://i.dummyjson.com/data/products/4/2.jpg",
+            "https://i.dummyjson.com/data/products/4/3.jpg",
+            "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 11,
+          "id": 1
+        },
+        {
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/2/1.jpg",
+            "https://i.dummyjson.com/data/products/2/2.jpg",
+            "https://i.dummyjson.com/data/products/2/3.jpg",
+            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 11,
+          "id": 2
+        }
+      ],
+      "totalAmount": 999,
+      "totalItems": 2,
+      "user": {
+        "email": "kaalidash208@gmail.com",
+        "password": "Password@123",
+        "addresses": [
+          {
+            "name": "sukraj",
+            "email": "sukrajchaudhary90@gmail.com",
+            "phone": "9809521702",
+            "street": "state II",
+            "city": "KTM",
+            "state": "5",
+            "pincode": "12345"
+          },
+          {
+            "name": "Sukraj",
+            "email": "sukrajchaudhary90@gmail.com",
+            "phone": "9809521702",
+            "street": "state II",
+            "city": "KTM",
+            "state": "state5",
+            "pincode": "12345"
+          }
+        ],
+        "role": "admin",
+        "id": 11
+      },
+      "paymentmethod": "cash",
+      "selectedAddress": {
+        "name": "Sukraj",
+        "email": "sukrajchaudhary90@gmail.com",
+        "phone": "9809521702",
+        "street": "state II",
+        "city": "KTM",
+        "state": "state5",
+        "pincode": "12345"
+      },
+      "status": "deliver",
+      "id": 19
+    },
+    {
+      "items": [
+        {
+          "title": "Samsung Galaxy Book",
+          "description": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
+          "price": 1499,
+          "discountPercentage": 4.15,
+          "rating": 4.25,
+          "stock": 50,
+          "brand": "Samsung",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/7/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/7/1.jpg",
+            "https://i.dummyjson.com/data/products/7/2.jpg",
+            "https://i.dummyjson.com/data/products/7/3.jpg",
+            "https://i.dummyjson.com/data/products/7/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 9,
+          "id": 1
+        }
+      ],
+      "totalAmount": 1499,
+      "totalItems": 1,
+      "user": {
+        "email": "whoamiwhoami790@gmail.com",
+        "password": "Password@123",
+        "id": 9,
+        "addresses": [
+          {
+            "name": "Who ami Chaudhary",
+            "email": "Anusha12345@gmail.com",
+            "city": "KTM",
+            "state": "stateII",
+            "pincode": "12345",
+            "street": "state II",
+            "phone": "9809521702"
+          }
+        ]
+      },
+      "paymentmethod": "cash",
+      "selectedAddress": {
+        "name": "Who ami Chaudhary",
+        "email": "Anusha12345@gmail.com",
+        "city": "KTM",
+        "state": "stateII",
+        "pincode": "12345",
+        "street": "state II",
+        "phone": "9809521702"
+      },
+      "status": "pending",
+      "id": 20
     }
   ]
 }

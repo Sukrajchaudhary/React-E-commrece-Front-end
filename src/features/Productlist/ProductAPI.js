@@ -1,17 +1,17 @@
 export function fetchAllproducts() {
   return new Promise(async (resolve) => {
     const response = await fetch("http://localhost:800/products");
+
     const data = await response.json();
     resolve({ data });
   });
 }
 
-
-
-export function fetchProuctsByFilters(filter,sort,pagination) {
-  let querystring = '';
+export function fetchProuctsByFilters(filter, sort, pagination, admin) {
+  let querystring = "";
 
   // Handle filters
+  //tODO:server will filter deleted products
   for (let key in filter) {
     const categoryValues = filter[key];
     if (Array.isArray(categoryValues) && categoryValues.length > 0) {
@@ -30,12 +30,16 @@ export function fetchProuctsByFilters(filter,sort,pagination) {
   for (let key in pagination) {
     querystring += `${key}=${pagination[key]}&`;
   }
-
+  if (admin) {
+    querystring += `admin=true`;
+  }
   return new Promise(async (resolve) => {
     try {
-      const response = await fetch("http://localhost:800/products?" + querystring);
+      const response = await fetch(
+        "http://localhost:800/products?" + querystring
+      );
       const data = await response.json();
-      const totalItems = await response.headers.get('X-Total-Count');
+      const totalItems = await response.headers.get("X-Total-Count");
       resolve({ data: { products: data, totalItems: +totalItems } });
     } catch (error) {
       // Handle error appropriately, e.g., logging, error message, etc.
@@ -45,7 +49,6 @@ export function fetchProuctsByFilters(filter,sort,pagination) {
   });
 }
 
-
 // fteching product by category
 export function fetchAllCategories() {
   return new Promise(async (resolve) => {
@@ -54,7 +57,6 @@ export function fetchAllCategories() {
     resolve({ data });
   });
 }
-
 
 // fetching brands
 export function fetchAllbrands() {
@@ -74,13 +76,12 @@ export function fetchProductBYId(id) {
 }
 export function createProduct(product) {
   return new Promise(async (resolve) => {
-    const response = await fetch(`http://localhost:800/products/`,{
-      method:'POST',
-      body:JSON.stringify(product),
-      headers:{
-        'content-type':'application/json'
-      }
-      
+    const response = await fetch(`http://localhost:800/products/`, {
+      method: "POST",
+      body: JSON.stringify(product),
+      headers: {
+        "content-type": "application/json",
+      },
     });
     const data = await response.json();
     resolve({ data });
@@ -90,7 +91,7 @@ export function createProduct(product) {
 
 export function updateProduct(update) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:800/products/"+update.id, {
+    const response = await fetch("http://localhost:800/products/" + update.id, {
       method: "PATCH",
       body: JSON.stringify(update),
       headers: {

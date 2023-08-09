@@ -14,24 +14,25 @@ import {
 } from "../features/cart/cartSlice";
 
 import { selectLoggedInUsr, updateUserAsync } from "../features/auth/authSlice";
-import { placeOrderAsync,currentOrder } from "../features/Order/orderSlice";
+import { placeOrderAsync, currentOrder } from "../features/Order/orderSlice";
 import { selectLoginuserInfo } from "../features/user/userSlice";
 
 const Checkout = () => {
   const dispatch = useDispatch();
   const items = useSelector(selectCart);
+  console.log(items)
   const user = useSelector(selectLoginuserInfo);
-  const  currentorder=useSelector(currentOrder)
+  const currentorder = useSelector(currentOrder);
   const [open, setOpen] = useState(true);
   const totalAmount = items.reduce(
-    (amount, item) => item.price * item.quantity + amount,
+    (amount, item) => item.product * item.quantity + amount,
     0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
   const [selectedAddress, setselectedAddress] = useState(null);
   const [paymentmethod, setPatmentMethod] = useState("cash");
   const handleQuantity = (e, item) => {
-    dispatch(updateCartAsync({ ...item, quantity: +e.target.value }));
+    dispatch(updateCartAsync({ id: item.id, quantity: +e.target.value }));
   };
 
   const {
@@ -57,18 +58,20 @@ const Checkout = () => {
       items,
       totalAmount,
       totalItems,
-      user,
+      user:user.id,
       paymentmethod,
       selectedAddress,
-      status:'pending' //other status delover
+      status: "pending", //other status delover
     };
     dispatch(placeOrderAsync(order));
     //  Todo:///////////////
   };
   return (
     <>
-    {!items.length && <Navigate to="/"></Navigate>}
-    {currentorder&& <Navigate to={`/OrdersuccessPage/${currentorder.id}`}></Navigate>}
+      {!items.length && <Navigate to="/"></Navigate>}
+      {currentorder && (
+        <Navigate to={`/OrdersuccessPage/${currentorder.id}`}></Navigate>
+      )}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-x-8  gap-y-10 lg:grid-cols-5">
           <div className="lg:col-span-3">
@@ -345,8 +348,8 @@ const Checkout = () => {
                       <li key={item.id} className="flex py-6">
                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                           <img
-                            src={item.thumbnail}
-                            alt={item.title}
+                            src={item.product.thumbnail}
+                            alt={item.product.title}
                             className="h-full w-full object-cover object-center"
                           />
                         </div>
@@ -355,12 +358,12 @@ const Checkout = () => {
                           <div>
                             <div className="flex justify-between text-base font-medium text-gray-900">
                               <h3>
-                                <a href={item.href}>{item.title}</a>
+                                <a href={item.product.id}>{item.product.title}</a>
                               </h3>
-                              <p className="ml-4">${item.price}</p>
+                              <p className="ml-4">${item.product.price}</p>
                             </div>
                             <p className="mt-1 text-sm text-gray-500">
-                              {item.brand}
+                              {item.product.brand}
                             </p>
                           </div>
                           <div className="flex flex-1 items-end justify-between text-sm">
@@ -374,7 +377,7 @@ const Checkout = () => {
                               </label>
                               <select
                                 onChange={(e) => handleQuantity(e, item)}
-                                value={item.quantity}
+                                value={item.product.quantity}
                               >
                                 <option value="1">1</option>
                                 <option value="2">2</option>

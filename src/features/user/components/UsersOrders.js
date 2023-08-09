@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  fetchLoggedInUserAsync,
+  fetchLoggedInUserOrderAsync,
   selectLoginuserInfo,
   selectOrders,
 } from "../userSlice";
@@ -10,14 +10,14 @@ export default function UsersOrders() {
   const dispatch = useDispatch();
   const orders = useSelector(selectOrders);
   useEffect(() => {
-    dispatch(fetchLoggedInUserAsync(user.id));
+    dispatch(fetchLoggedInUserOrderAsync(user.id));
   }, []);
 
   return (
     <div>
       <div>
         {orders.map((order) => (
-          <div className="mx-auto mt-10 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto mt-10 bg-white max-w-7xl px-4 sm:px-6 lg:px-8" key={order.id}>
             <h3 className="text-2xl font-bold tracking-tighter text-black-900">
               Order:#{order.id}
             </h3>
@@ -31,8 +31,8 @@ export default function UsersOrders() {
                     <li key={item.id} className="flex py-6">
                       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                         <img
-                          src={item.thumbnail}
-                          alt={item.title}
+                          src={item.product.thumbnail}
+                          alt={item.product.title}
                           className="h-full w-full object-cover object-center"
                         />
                       </div>
@@ -41,12 +41,15 @@ export default function UsersOrders() {
                         <div>
                           <div className="flex justify-between text-base font-medium text-gray-900">
                             <h3>
-                              <a href={item.href}>{item.title}</a>
+                              <a href={item.product.href}>{item.product.title}</a>
                             </h3>
-                            <p className="ml-4">${item.price}</p>
+                            <p className="ml-4">${item.product.price}</p>
                           </div>
                           <p className="mt-1 text-sm text-gray-500">
-                            {item.brand}
+                            {item.product.brand}
+                          </p>
+                          <p className="mt-1 text-sm text-gray-500">
+                            {item.product.description}
                           </p>
                         </div>
                       </div>

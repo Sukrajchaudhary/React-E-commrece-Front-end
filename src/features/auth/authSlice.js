@@ -3,7 +3,7 @@ import { createUser,checkUser,signOut} from './authAPI';
 import {updateUser} from '../user/userAPI'
 
 const initialState = {
-  loggedInuser:null,
+  loggedInuserToken:null,
   status: 'idle',
   error:null
 };
@@ -20,9 +20,13 @@ export const createUserAsync = createAsyncThunk(
 
 export const checkUserAsync = createAsyncThunk(
   'auth/checkUser',
-  async (logininfo) => {
+  async (logininfo,{rejectWithValue}) => {
+   try {
     const response = await checkUser(logininfo);
     return response.data;
+   } catch (error) {
+    return rejectWithValue(error)
+   }
    
   }
 );
@@ -57,18 +61,18 @@ export const authSlice = createSlice({
       })
       .addCase(createUserAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.loggedInuser = action.payload;
+        state.loggedInuserToken = action.payload;
       })
       .addCase(checkUserAsync.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(checkUserAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.loggedInuser = action.payload;
+        state.loggedInuserToken = action.payload;
       })
       .addCase(checkUserAsync.rejected, (state, action) => {
         state.status = 'idle';
-        state.error= action.error;
+        state.error= action.payload;
       })
       .addCase(updateUserAsync.pending, (state, action) => {
         state.status = 'loading';
@@ -76,7 +80,7 @@ export const authSlice = createSlice({
       })
       .addCase(updateUserAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.loggedInuser=action.payload;
+        state.loggedInuserToken=action.payload;
        
       })
       // for signout
@@ -86,7 +90,7 @@ export const authSlice = createSlice({
       })
       .addCase(signOutUserAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.loggedInuser=null;
+        state.loggedInuserToken=null;
        
       })
       
@@ -94,7 +98,7 @@ export const authSlice = createSlice({
 });
 
 export const { increment } = authSlice.actions;
-export const selectLoggedInUsr = (state) => state.auth.loggedInuser;
+export const selectLoggedInUsr = (state) => state.auth.loggedInuserToken;
 export const selectErrors = (state) => state.auth.error;
 
 export default authSlice.reducer;

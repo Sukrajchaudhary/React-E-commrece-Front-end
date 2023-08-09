@@ -4,6 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { checkUserAsync, selectErrors, selectLoggedInUsr } from "../authSlice";
+import logo from '../../../assest/logo.png'
 export default function Login() {
   const user = useSelector(selectLoggedInUsr);
   const error = useSelector(selectErrors);
@@ -15,15 +16,16 @@ export default function Login() {
     formState: { errors },
   } = useForm();
   return (
-    <> 
-    {user && <Navigate to='/' replace={true}></Navigate> }
+    <>
+      {user && <Navigate to="/" replace={true}></Navigate>}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            src={logo} 
             alt="Your Company"
           />
+          
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign in to your account
           </h2>
@@ -35,7 +37,11 @@ export default function Login() {
             noValidate
             onSubmit={handleSubmit((data) =>
               dispatch(
-                checkUserAsync({ email: data.email, password: data.password ,addresses:[]})
+                checkUserAsync({
+                  email: data.email,
+                  password: data.password,
+                  addresses: [],
+                })
               )
             )}
           >
@@ -63,7 +69,6 @@ export default function Login() {
                 )}
               </div>
             </div>
-            
 
             <div>
               <div className="flex items-center justify-between">
@@ -75,7 +80,7 @@ export default function Login() {
                 </label>
                 <div className="text-sm">
                   <Link
-                    to='/ForgetPasword'
+                    to="/ForgetPasword"
                     className="font-semibold text-indigo-600 hover:text-indigo-500"
                   >
                     Forgot password?
@@ -103,9 +108,7 @@ export default function Login() {
                 )}
               </div>
             </div>
-            {error && (
-                  <p className="text-red-500">{error.message}</p>
-                )}
+            {error && <p className="text-red-500">{error || error.message}</p>}
             <div>
               <button
                 type="submit"
