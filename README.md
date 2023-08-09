@@ -5,6 +5,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
+first install json server by:npm i json-server
+ And enter cmd:json-server db.json -p800
+Note:once you start json server dont't kill
+Again enter command:npm start
+
 
 ### `npm start`
 
