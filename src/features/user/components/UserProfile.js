@@ -424,6 +424,9 @@ export default function UserProfile() {
                         <p className="mt-1 truncate text-xs leading-5 text-gray-500">
                           {address.email}
                         </p>
+                        <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                          {address.city}
+                        </p>
                       </div>
                     </div>
                     <div className="hidden sm:flex sm:flex-col sm:items-end">

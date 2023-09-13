@@ -30,6 +30,7 @@ import AdminProductDetailsPages from "./pages/AdminProductDetailsPages";
 import AdminProductForm from "./pages/AdminProductForm";
 import AdminOrderPages from "./pages/AdminOrderPages";
 import { positions, Provider } from "react-alert";
+import { ResetUserPassword } from "./pages/ResetUserPassword";
 import AlertTemplate from "react-alert-template-basic";
 const router = createBrowserRouter([
   {
@@ -134,6 +135,14 @@ const router = createBrowserRouter([
       <ProtectedAdmin>
         <AdminProductForm></AdminProductForm>
       </ProtectedAdmin>
+    ),
+  },
+  {
+    path: "/reset-password",
+    element: (
+   
+        <ResetUserPassword></ResetUserPassword>
+      
     ),
   },
 ]);
